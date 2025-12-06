@@ -596,3 +596,37 @@ exports.updateActiveStatus = async (req, res) => {
     });
   }
 };
+
+exports.getStoreStatus = async (req, res) => {
+  try {
+    // Ambil admin pertama
+    const admin = await User.findOne({ role: "admin" });
+
+    if (!admin) {
+      return res.status(404).json({
+        success: false,
+        status_code: 404,
+        message: "Admin tidak ditemukan",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      status_code: 200,
+      message: "Berhasil mengambil status aktif admin",
+      data: {
+        id: admin._id,
+        name: admin.name,
+        isActive: admin.isActive,
+      },
+    });
+
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      status_code: 500,
+      message: "Internal server error",
+      error: error.message,
+    });
+  }
+};
