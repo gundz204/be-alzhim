@@ -22,6 +22,6 @@ router.post("/forgot-password", forgotPassword);
 router.post("/reset-password/:token", resetPassword);
 router.put("/update-profile", protect, uploadImage, updateProfile);
 router.put("/update-active", protect, adminOnly, updateActiveStatus);
-router.post("/store-status", getStoreStatus);
+router.get("/store-status", getStoreStatus);
 
 module.exports = router;
